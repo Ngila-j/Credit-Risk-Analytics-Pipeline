@@ -1,0 +1,20 @@
+﻿version: 2
+
+models:
+  - name: stg_bank_fraud
+    description: "Staged bank fraud applications with standardized columns and types."
+    columns:
+      - name: is_fraud
+        description: "True if the application was classified as fraudulent, False otherwise."
+        tests:
+          - not_null
+
+      - name: credit_risk_score
+        description: "The calculated credit risk score of the applicant."
+        tests:
+          - not_null
+
+      - name: applicant_income
+        description: "The standardized income metric of the applicant."
+        tests:
+          - not_null

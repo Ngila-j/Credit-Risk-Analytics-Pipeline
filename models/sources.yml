@@ -1,0 +1,11 @@
+﻿version: 2
+
+sources:
+  - name: minio_lake
+    description: "Raw ingestion layer files stored in MinIO bronze bucket."
+    loader: duckdb
+    tables:
+      - name: bank_fraud_base
+        description: "The base dataset for bank account fraud applications."
+        meta:
+          external_location: "read_csv_auto('s3://bronze-layer/bank_fraud_base.csv')"
