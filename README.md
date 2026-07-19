@@ -1,41 +1,34 @@
-Welcome to your new dbt project!
-Credit Risk Analytics Pipeline
+Credit-Risk-Analytics-Pipeline
+An end-to-end data engineering and machine learning pipeline designed to detect financial fraud. This project demonstrates the ability to build a robust ELT workflow using dbt for data transformation and Python (scikit-learn) for predictive modeling.
+
 🚀 Project Overview
-This project serves as an end-to-end data engineering pipeline designed to automate the transformation and reporting of financial credit risk data. By leveraging a local data lake architecture, this pipeline provides streamlined, actionable insights for decision-making processes.
+This pipeline addresses the common real-world challenge of class imbalance in credit risk datasets. By leveraging dbt to perform data-level balancing at the transformation layer and implementing feature engineering, I successfully improved the model's ability to identify fraudulent transactions.
 
 🛠 Tech Stack
-Transformation: dbt for building modular and scalable data transformation models.
+Transformation: dbt (data build tool)
 
-Database Engine: DuckDB for high-performance, local analytical processing.
+Database: DuckDB
 
-Visualization/BI: Metabase for interactive data reporting and dashboarding.
+Modeling: Python, scikit-learn (Random Forest)
 
-📊 Key Features
-Automated Data Modeling: Developed the mart_credit_risk_summary model to simplify complex financial calculations and ensure data consistency.
+Version Control: Git & GitHub
 
-Pipeline Efficiency: Engineered a robust workflow that reduces manual reporting overhead in financial compliance tasks.
+📊 Model Performance
+After implementing SQL-level undersampling and engineered features (address_tenure_diff, is_low_similarity_score), the model achieved the following performance on the test set:
 
-Interactive BI Integration: Connected to Metabase to visualize credit risk trends, enabling real-time monitoring of financial indicators.
+Plaintext
+              precision    recall  f1-score   support
 
-📁 Repository Structure
-/models: Contains all dbt SQL transformation models used to process raw data.
+       False       0.67      0.68      0.67      2180
+        True       0.68      0.67      0.68      2232
 
-/dashboards: Contains documentation and screenshots of the Metabase visual analytics.
+    accuracy                           0.67      4412
+   macro avg       0.68      0.68      0.67      4412
+weighted avg       0.68      0.67      0.67      4412
+🏗 Key Engineering Highlights
+Data Pipeline: Developed a modular dbt project (Staging -> Intermediate/Silver -> Marts) to clean and transform raw bank data.
 
-.gitignore: Configured to exclude local database files and environment-specific secrets.
+Addressing Imbalance: Solved the "0% recall" issue by moving data-level balancing (undersampling) into the SQL pipeline, ensuring the model trains on a 50/50 split of fraud vs. non-fraud cases.
 
-📈 Impact
-This pipeline demonstrates proficiency in modern data engineering practices, transitioning from manual, error-prone data handling to an automated, scalable infrastructure that supports reliable financial analytics.
-### Using the starter project
-
-Try running the following commands:
-- dbt run
-- dbt test
-
-
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
+Feature Engineering: Created derived features that capture behavioral red flags, significantly improving the predictive power of the model.
 - Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
