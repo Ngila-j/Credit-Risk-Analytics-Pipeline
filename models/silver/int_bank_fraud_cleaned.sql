@@ -1,12 +1,20 @@
-﻿{{ config(materialized='view') }}
+﻿{{ config(materialized='table') }}
 
-with source_data as (
+with base as (
     select * from {{ ref('stg_bank_fraud') }}
+),
+
+fraud_cases as (
+    select * from base where is_fraud = true
+),
+
+non_fraud_cases as (
+    select * from base where is_fraud = false
+    -- Take a random sample equal to the number of fraud cases
+    order by random() 
+    limit (select count(*) from fraud_cases)
 )
 
-select
-    -- Cast columns explicitly for consistency
-    cast(credit_risk_score as integer) as credit_risk_score,
-    cast(is_fraud as boolean) as is_fraud,
-    cast(applicant_income as double) as applicant_income
-from source_data
+select * from fraud_cases
+union all
+select * from non_fraud_cases

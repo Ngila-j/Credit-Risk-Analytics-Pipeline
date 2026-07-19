@@ -1,4 +1,4 @@
-
+seeds/bank_fraud_base.csv
 target/
 dbt_packages/
 logs/

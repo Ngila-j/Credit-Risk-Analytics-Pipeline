@@ -1,4 +1,10 @@
-﻿# 1. Define the project directory
+﻿# 1. Run dbt to prepare the latest features
+dbt run --select models/marts/ml
+
+# 2. Run the python script to train the model
+python train_model.py
+
+Write-Host "Pipeline and Model Training Complete!"# 1. Define the project directory
 $projectPath = "C:\Users\Josphat\local-de-sandbox\dbt_project"
 $dbtPath = "C:\Users\Josphat\AppData\Roaming\Python\Python314\Scripts\dbt.exe"
 

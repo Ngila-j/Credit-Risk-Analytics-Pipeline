@@ -1,5 +1,9 @@
 ﻿{{ config(materialized='table') }}
 
+-- We use ref('int_bank_fraud_cleaned') which represents your local transformation layer.
+-- Ensure that the 'int_bank_fraud_cleaned' model itself is referencing 
+-- {{ ref('bank_fraud_base') }} to avoid S3/Cloud dependencies.
+
 with silver_data as (
     select * from {{ ref('int_bank_fraud_cleaned') }}
 ),
